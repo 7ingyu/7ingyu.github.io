@@ -1,7 +1,6 @@
-import React, { PropsWithRef, useEffect, useState } from 'react';
+import React, { useEffect, useState, MouseEvent, ComponentType } from 'react';
 import { Collapse } from 'bootstrap';
-// import { Tween, Timeline, ScrollTrigger } from 'react-gsap';
-import {Nav, Animation, Landing, About, Project} from './components';
+import {Landing, About, Project} from './components';
 import projects from './data/projects.json';
 
 const components: { [key: string]: React.ComponentType } = {
@@ -14,11 +13,11 @@ const App = () => {
   useEffect(() => {
     const els = document.querySelectorAll('.collapse');
     const cols = [...els].map(collapseEl => new Collapse(collapseEl, {toggle: false}));
-    cols.forEach(col => col.hide())
+    cols.forEach(col => col.show())
     setCollapses(cols);
   }, [])
 
-  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>, i: number) => {
+  const handleClick = (e: MouseEvent<HTMLAnchorElement>, i: number) => {
     e.preventDefault();
     collapses[i].toggle();
   }
@@ -38,23 +37,13 @@ const App = () => {
       <main>
         <ul className='list-group'>
           {Object.keys(components).map((name, i) => {
-            const Component: React.ComponentType = components[name];
+            const Component: ComponentType = components[name];
             return (
               <li
                 key={`li-${i}-${name.toLowerCase()}`}
                 className="nav-collapse list-group-item"
               >
-                <a
-                  className="nav-collapse-toggle"
-
-                  href={`#${name.toLowerCase()}`}
-                  onClick={(e) => handleClick(e, i)}
-                >
-                  <span>{name}</span>
-                </a>
-                <div className="collapse">
-                  <Component />
-                </div>
+                <Component />
               </li>
             )
           })}
@@ -63,20 +52,14 @@ const App = () => {
             key={`li-project-${idx}}`}
             className="nav-collapse list-group-item"
           >
-            <a
-              className="nav-collapse-toggle"
-              href={`#project-${proj.name.toLowerCase()}`}
-              onClick={(e) => handleClick(e, idx + Object.keys(components).length)}
-            >
-              <span>{proj.name}</span>
-            </a>
-            <div className="collapse">
-              <Project {...{idx, ...proj}} />
-            </div>
+            <Project {...{idx, ...proj}} />
           </li>
           ))}
         </ul>
       </main>
+      <footer>
+        {/* Contact Info Here*/}
+      </footer>
     </div>
   );
 };
