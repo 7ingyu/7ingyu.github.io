@@ -4,9 +4,11 @@
 
 .nav-collapse {
   padding: 0;
+  border-radius: 0 !important;
 }
 
 .nav-collapse-toggle {
+  @extend .container;
   display: flex;
   position: relative;
   width: 100%;

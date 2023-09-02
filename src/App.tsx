@@ -1,58 +1,82 @@
-import React, { useEffect, useState } from 'react';
+import React, { PropsWithRef, useEffect, useState } from 'react';
+import { Collapse } from 'bootstrap';
 // import { Tween, Timeline, ScrollTrigger } from 'react-gsap';
 import {Nav, Animation, Landing, About, Project} from './components';
 import projects from './data/projects.json';
 
 const components: { [key: string]: React.ComponentType } = {
-  Landing, About, Project
+  Landing, About
 };
 
 const App = () => {
-
-  const [ page, setPage ] = useState<string>('Landing');
-  const [ Component, setComponent ] = useState<React.ComponentType<P>>(Landing);
+  const [ collapses, setCollapses ] = useState<Collapse[]>([]);
 
   useEffect(() => {
-    setComponent(components[page]);
-  }, [page]);
+    const els = document.querySelectorAll('.collapse');
+    const cols = [...els].map(collapseEl => new Collapse(collapseEl, {toggle: false}));
+    cols.forEach(col => col.hide())
+    setCollapses(cols);
+  }, [])
 
-  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>, pageName: string) => {
+  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>, i: number) => {
     e.preventDefault();
-    setPage(pageName);
-  };
+    collapses[i].toggle();
+  }
 
   return (
     <div>
       <header className='container'>
         <h1>
           <a
-            aria-current={page === 'Landing' ? 'page' : false}
             href={`#landing`}
-            onClick={(e) => handleClick(e, 'Landing')}
+            onClick={(e) => handleClick(e, 0)}
           >
             Tea Portfolio
           </a>
         </h1>
       </header>
-      <nav>
+      <main>
         <ul className='list-group'>
-          {Object.keys(components).map((name, i) => (
-            <li
-              key={`li-${i}-${name.toLowerCase()}`}
-              className="nav-collapse list-group-item"
-            >
-              <a
-                className="nav-collapse-toggle"
-                aria-current={page === name ? 'page' : false}
-                href={`#${name.toLowerCase()}`}
-                onClick={(e) => handleClick(e, name)}
+          {Object.keys(components).map((name, i) => {
+            const Component: React.ComponentType = components[name];
+            return (
+              <li
+                key={`li-${i}-${name.toLowerCase()}`}
+                className="nav-collapse list-group-item"
               >
-                <span>{name}</span>
-              </a>
-            </li>
+                <a
+                  className="nav-collapse-toggle"
+
+                  href={`#${name.toLowerCase()}`}
+                  onClick={(e) => handleClick(e, i)}
+                >
+                  <span>{name}</span>
+                </a>
+                <div className="collapse">
+                  <Component />
+                </div>
+              </li>
+            )
+          })}
+          {projects.map((proj, idx) => (
+            <li
+            key={`li-project-${idx}}`}
+            className="nav-collapse list-group-item"
+          >
+            <a
+              className="nav-collapse-toggle"
+              href={`#project-${proj.name.toLowerCase()}`}
+              onClick={(e) => handleClick(e, idx + Object.keys(components).length)}
+            >
+              <span>{proj.name}</span>
+            </a>
+            <div className="collapse">
+              <Project {...{idx, ...proj}} />
+            </div>
+          </li>
           ))}
         </ul>
-      </nav>
+      </main>
     </div>
   );
 };
