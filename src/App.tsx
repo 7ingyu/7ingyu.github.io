@@ -1,35 +1,60 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React, { useEffect, useState } from 'react';
+// import { Tween, Timeline, ScrollTrigger } from 'react-gsap';
+import {Nav, Animation, Landing, About, Project} from './components';
+import projects from './data/projects.json';
 
-function App() {
-  const [count, setCount] = useState(0)
+const components: { [key: string]: React.ComponentType } = {
+  Landing, About, Project
+};
+
+const App = () => {
+
+  const [ page, setPage ] = useState<string>('Landing');
+  const [ Component, setComponent ] = useState<React.ComponentType<P>>(Landing);
+
+  useEffect(() => {
+    setComponent(components[page]);
+  }, [page]);
+
+  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>, pageName: string) => {
+    e.preventDefault();
+    setPage(pageName);
+  };
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+    <div>
+      <header className='container'>
+        <h1>
+          <a
+            aria-current={page === 'Landing' ? 'page' : false}
+            href={`#landing`}
+            onClick={(e) => handleClick(e, 'Landing')}
+          >
+            Tea Portfolio
+          </a>
+        </h1>
+      </header>
+      <nav>
+        <ul className='list-group'>
+          {Object.keys(components).map((name, i) => (
+            <li
+              key={`li-${i}-${name.toLowerCase()}`}
+              className="nav-collapse list-group-item"
+            >
+              <a
+                className="nav-collapse-toggle"
+                aria-current={page === name ? 'page' : false}
+                href={`#${name.toLowerCase()}`}
+                onClick={(e) => handleClick(e, name)}
+              >
+                <span>{name}</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    </div>
+  );
+};
 
-export default App
+export default App;
