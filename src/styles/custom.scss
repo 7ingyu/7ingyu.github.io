@@ -1,5 +1,5 @@
-$header-height: 3rem;
-$toggle-height: 2rem;
+// $header-height: 3rem;
+// $toggle-height: 2rem;
 
 ::-webkit-scrollbar {
   display: none;
@@ -9,65 +9,85 @@ $toggle-height: 2rem;
   scrollbar-width: none;
 }
 
-.viewport {
-  height: 100vh;
-  overflow-y: scroll;
+// .viewport {
+//   height: 100vh;
+//   overflow-y: scroll;
+// }
+
+section {
+  position: fixed;
+  // min-height: 2rem;
+  width: 100%;
+  overflow: hidden;
 }
 
-header {
-  position: relative;
-  height: $header-height;
+.pin {
+  top: 0;
+  left: 0;
+}
+
+.project-header {
+  position: fixed;
+  min-height: 2rem;
   overflow: hidden;
-  padding: 0.5rem;
-  font-size: 1.5rem;
-  margin-bottom: 0px;
+  width: 100%;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+
+  & span {
+    @extend .container;
+    color: white;
+  }
 }
 
 main {
-  min-height: calc(100vh - $header-height);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  // position: relative;
+  min-height: 100vh;
 }
 
-.nav-collapse {
-  padding: 0;
-  border-radius: 0 !important;
-  z-index: 100;
-  overflow: scroll;
-}
+// .nav-collapse {
+//   padding: 0;
+//   border-radius: 0 !important;
+//   z-index: 100;
+//   overflow: scroll;
+// }
 
-.collapse {
-  // height: 1000px;
-  // overflow-y: scroll;
-  // overflow-x: hidden;
+// .collapse {
+//   // height: 1000px;
+//   // overflow-y: scroll;
+//   // overflow-x: hidden;
 
-  &-toggle {
-    display: flex;
-    width: 100%;
-    padding: var(--bs-list-group-item-padding-y) var(--bs-list-group-item-padding-x);
-    justify-content: start;
-    align-items: start;
-    text-decoration: none;
-    height: $toggle-height;
+//   &-toggle {
+//     display: flex;
+//     width: 100%;
+//     padding: var(--bs-list-group-item-padding-y) var(--bs-list-group-item-padding-x);
+//     justify-content: start;
+//     align-items: start;
+//     text-decoration: none;
 
-    & span {
-      @extend .container;
-    }
-  }
-}
+//     & span {
+//       @extend .container;
+//     }
+//   }
+// }
 
-.project-img {
-  width: 100%;
-  object-fit: cover;
-  object-position: top center;
+// .project {
+//   &-content-container {
+//     overflow: hidden;
+//   }
+//   &-img {
+//     width: 100%;
+//     object-fit: cover;
+//     object-position: top center;
 
-  &-container {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: calc(100vh - $toggle-height - 2rem);
-    // overflow: hidden;
-  }
-}
+//     &-container {
+//       position: absolute;
+//       top: 0;
+//       left: 0;
+//       width: 100vw;
+//       // overflow: hidden;
+//     }
+//   }
+// }
