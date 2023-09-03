@@ -37,7 +37,7 @@ const Project = ({idx, name, ...props}: ProjectProps) => {
       // > 0 and play (playing) -> reverse
       timeline.current?.getGSAP().reverse();
     }
-    setOpen(!open);
+    setTimeout(() => setOpen(!open), 1000);
   };
 
   return (
@@ -108,7 +108,7 @@ const Project = ({idx, name, ...props}: ProjectProps) => {
           height: `6000px`,
           y: '0vh',
         }}
-        position="2"
+        position="1"
         duration={1}
       >
         <div
