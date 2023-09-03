@@ -1,7 +1,8 @@
-import { RefObject, useRef } from 'react';
+import { RefObject, useRef, useState } from 'react';
 import { Tween, Timeline, PlayState } from 'react-gsap';
-import ProjectTimeline from './ProjectTimeline';
+import ProjectScroll from './ProjectScroll';
 import projects from '@/data/projects.json';
+import ProjectCollapse from './ProjectCollapse';
 
 export interface ProjectProps {
   "idx": number;
@@ -15,7 +16,8 @@ export interface ProjectProps {
   "color": string;
 }
 
-const Project = ({idx, ...props}: ProjectProps) => {
+const Project = ({idx, name, ...props}: ProjectProps) => {
+  const [ open, setOpen ] = useState<boolean>(false);
   const timeline: RefObject<Timeline> = useRef(null);
 
   const handleClick = (e) => {
@@ -35,12 +37,13 @@ const Project = ({idx, ...props}: ProjectProps) => {
       // > 0 and play (playing) -> reverse
       timeline.current?.getGSAP().reverse();
     }
+    setOpen(!open);
   };
 
   return (
     <Timeline
       ref={timeline}
-      target={<ProjectTimeline {...{handleClick, timeline, idx, ...props}} />}
+      target={<ProjectCollapse {...{handleClick, timeline, idx, name, ...props}} />}
       playState={PlayState.pause}
       totalProgress={0}
     >
@@ -60,19 +63,6 @@ const Project = ({idx, ...props}: ProjectProps) => {
         position="0"
         duration={1}
       />
-      {/* <Tween
-        target="content"
-        from={{
-          height: '0vh',
-          bottom: `0px`,
-        }}
-        to={{
-          height: `100vh`,
-          bottom: `0px`,
-        }}
-        position="0"
-        duration={1}
-      /> */}
 
       <Tween
         target="section"
@@ -80,11 +70,25 @@ const Project = ({idx, ...props}: ProjectProps) => {
           height: '0vh',
         }}
         to={{
-          height: `300vh`,
+          height: `100vh`,
+          overflow: null
         }}
         position="1"
         duration={0}
       />
+      {/* <Tween
+        target="bg"
+        from={{
+          height: '0vh',
+          position: 'fixed'
+        }}
+        to={{
+          height: `6000px`,
+          position: 'static'
+        }}
+        position="1"
+        duration={0}
+      /> */}
       <Tween
         target="header"
         to={{
@@ -95,6 +99,25 @@ const Project = ({idx, ...props}: ProjectProps) => {
         position="1"
         duration={1}
       />
+      <Tween
+        from={{
+          height: '0px',
+          y: '100vh',
+        }}
+        to={{
+          height: `6000px`,
+          y: '0vh',
+        }}
+        position="2"
+        duration={1}
+      >
+        <div
+          id={`project-${idx}-${name}-bg`}
+          // ref={references.bg}
+        >
+          {open && <ProjectScroll {...{handleClick, timeline, idx, name, ...props}} />}
+        </div>
+      </Tween>
 
     </Timeline>
   );

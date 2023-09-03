@@ -1,10 +1,12 @@
-import { forwardRef, useRef, useImperativeHandle, RefObject } from 'react';
+import { forwardRef, useRef, useImperativeHandle, RefObject, MutableRefObject } from 'react';
 import { ProjectProps } from './Project';
+import projects from '@/data/projects.json';
 
 interface References {
   container: RefObject<HTMLDivElement>;
   content: RefObject<HTMLDivElement>;
   img: RefObject<HTMLDivElement>;
+  badges: RefObject<Array<HTMLSpanElement | null>>;
 }
 
 const ProjectContent = forwardRef(({
@@ -23,28 +25,36 @@ const ProjectContent = forwardRef(({
     container: useRef(null),
     content: useRef(null),
     img: useRef(null),
+    badges: useRef([])
   }
 
   useImperativeHandle(ref, () => (references));
 
   return (
-    <div
-      className="position-relative project-content-container"
-      ref={references.container}
-      id={`collapse-${idx}-${name.toLowerCase()}`}
-    >
+    // <div className="project-bg" ref={references.bg}>
 
       <div
-        className={`project-img-container`}
-        ref={references.img}
+        className="project-content-container"
+        ref={references.container}
+        id={`collapse-${idx}-${name.toLowerCase()}`}
+        style={{
+          height: `calc(100vh - ${(projects.length - idx - 1) * 2}rem - 3rem)`,
+          // bottom: `${(projects.length - idx - 1) * 2}rem`
+        }}
       >
-        <div>
-          <a href={url}>
-            {/* <picture>
-              <source media="(max-width: 768px)" srcSet={`${img}-sm.png`} />
-              <img className="project-img" src={`${img}.png`} alt={`screenshot of ${name} application`} />
-            </picture> */}
-          </a>
+
+        <div
+          className={`project-img-container`}
+          ref={references.img}
+        >
+          <div>
+            <a href={url}>
+              <picture>
+                <source media="(max-width: 768px)" srcSet={`${img}-sm.png`} />
+                <img className="project-img img-fluid" src={`${img}.png`} alt={`screenshot of ${name} application`} />
+              </picture>
+            </a>
+          </div>
         </div>
 
         <div ref={references.content}>
@@ -54,6 +64,7 @@ const ProjectContent = forwardRef(({
               <span
                 key={`project-${idx}-tech-${i}-${item}`}
                 className="badge bg-primary"
+                ref={el => references.badges.current?.push(el)}
               >
                 {item}
               </span>
@@ -64,7 +75,7 @@ const ProjectContent = forwardRef(({
           ))}
         </div>
       </div>
-    </div>
+    // </div>
   );
 });
 

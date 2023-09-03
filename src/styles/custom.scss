@@ -1,29 +1,29 @@
 // $header-height: 3rem;
 // $toggle-height: 2rem;
 
-::-webkit-scrollbar {
-  display: none;
-}
+// ::-webkit-scrollbar {
+//   display: none;
+// }
 
-* {
-  scrollbar-width: none;
-}
+// * {
+//   scrollbar-width: none;
+// }
 
 // .viewport {
 //   height: 100vh;
 //   overflow-y: scroll;
 // }
+body {
+  min-height: 100vh;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
 
 section {
   position: fixed;
   // min-height: 2rem;
   width: 100%;
   overflow: hidden;
-}
-
-.pin {
-  top: 0;
-  left: 0;
 }
 
 .project-header {
@@ -42,10 +42,30 @@ section {
   }
 }
 
-main {
-  // position: relative;
-  min-height: 100vh;
+.project-bg {
+  height: 300vh;
+  display: none;
 }
+
+.project-content-container {
+  position: sticky;
+  width: 100vw;
+  top: 3rem;
+  z-index: 1;
+  height: 100vh;
+
+  // & * {
+  //   position: relative;
+  //   width: 100%;
+  //   top: 0;
+  //   left: 0;
+  // }
+}
+
+// main {
+  // position: relative;
+  // min-height: 100vh;
+// }
 
 // .nav-collapse {
 //   padding: 0;

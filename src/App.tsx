@@ -11,7 +11,7 @@ const App = () => {
   return (
     <div>
       <header className='container'>
-        <h1>
+        <h1 className="m-0 p-0">
           <a
             href={`#landing`}
           >
