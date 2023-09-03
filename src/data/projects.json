@@ -8,7 +8,8 @@
     "desc": [
       "The KITCH meals application allows customers to buy KITCH meals online for in-store pickup. The application also allows for two forms of membership signup and management: Token memberships and delivery memberships. With token memberships, user sign up for a recurring plan that charges them for a set number of tokens each week. Each token can then be exchanged through the application or in-store for a meal. With delivery memberships, users select their desired meals and sign up for a weekly delivery plan. Members can view all their past orders and their current token count, as well as pause, change, or cancel any plans they have signed up for."
     ],
-    "tech": ["Laravel", "React", "MySQL"]
+    "tech": ["Laravel", "React", "MySQL"],
+    "color": "green"
   },
   {
     "name": "KITCH",
@@ -19,7 +20,8 @@
     "desc": [
       "The KITCH meals application allows customers to buy KITCH meals online for in-store pickup. The application also allows for two forms of membership signup and management: Token memberships and delivery memberships. With token memberships, user sign up for a recurring plan that charges them for a set number of tokens each week. Each token can then be exchanged through the application or in-store for a meal. With delivery memberships, users select their desired meals and sign up for a weekly delivery plan. Members can view all their past orders and their current token count, as well as pause, change, or cancel any plans they have signed up for."
     ],
-    "tech": ["Laravel", "React", "MySQL"]
+    "tech": ["Laravel", "React", "MySQL"],
+    "color": "blue"
   },
   {
     "name": "KITCH",
@@ -30,7 +32,8 @@
     "desc": [
       "The KITCH meals application allows customers to buy KITCH meals online for in-store pickup. The application also allows for two forms of membership signup and management: Token memberships and delivery memberships. With token memberships, user sign up for a recurring plan that charges them for a set number of tokens each week. Each token can then be exchanged through the application or in-store for a meal. With delivery memberships, users select their desired meals and sign up for a weekly delivery plan. Members can view all their past orders and their current token count, as well as pause, change, or cancel any plans they have signed up for."
     ],
-    "tech": ["Laravel", "React", "MySQL"]
+    "tech": ["Laravel", "React", "MySQL"],
+    "color": "red"
   },
   {
     "name": "KITCH",
@@ -41,6 +44,7 @@
     "desc": [
       "The KITCH meals application allows customers to buy KITCH meals online for in-store pickup. The application also allows for two forms of membership signup and management: Token memberships and delivery memberships. With token memberships, user sign up for a recurring plan that charges them for a set number of tokens each week. Each token can then be exchanged through the application or in-store for a meal. With delivery memberships, users select their desired meals and sign up for a weekly delivery plan. Members can view all their past orders and their current token count, as well as pause, change, or cancel any plans they have signed up for."
     ],
-    "tech": ["Laravel", "React", "MySQL"]
+    "tech": ["Laravel", "React", "MySQL"],
+    "color": "cyan"
   }
 ]

@@ -1,14 +1,10 @@
-import { MutableRefObject } from "react"
-import { forwardRef, useRef, useImperativeHandle, Fragment } from 'react';
+// import { MutableRefObject } from "react"
+// import { forwardRef, useRef, useImperativeHandle, Fragment } from 'react';
 // import { Tween, Timeline, ScrollTrigger } from 'react-gsap';
 
-export interface LandingProps {
-  ref: MutableRefObject<HTMLDivElement | null>;
-}
-
-const Page = ({ ref }: LandingProps) => {
+const Landing = () => {
   return (
-    <div ref={ref} id="landing">
+    <div id="landing">
       <div className="row">
         <div className="col-12 col-md-6">
           <h1>Tea Chen</h1>
@@ -23,17 +19,5 @@ const Page = ({ ref }: LandingProps) => {
     </div>
   );
 };
-
-const Landing = forwardRef((_props, ref) => {
-  const references = {
-    landing: useRef(null),
-  };
-
-  useImperativeHandle(ref, () => references);
-
-  return (
-    <Page ref={references.landing} />
-  );
-});
 
 export default Landing;

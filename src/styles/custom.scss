@@ -1,28 +1,73 @@
-.page {
+$header-height: 3rem;
+$toggle-height: 2rem;
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+* {
+  scrollbar-width: none;
+}
+
+.viewport {
   height: 100vh;
+  overflow-y: scroll;
+}
+
+header {
+  position: relative;
+  height: $header-height;
+  overflow: hidden;
+  padding: 0.5rem;
+  font-size: 1.5rem;
+  margin-bottom: 0px;
+}
+
+main {
+  min-height: calc(100vh - $header-height);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .nav-collapse {
   padding: 0;
   border-radius: 0 !important;
+  z-index: 100;
+  overflow: scroll;
 }
 
-.nav-collapse-toggle {
-  @extend .container;
-  display: flex;
-  position: relative;
-  width: 100%;
-  padding: var(--bs-list-group-item-padding-y) var(--bs-list-group-item-padding-x);
-  justify-content: start;
-  align-items: start;
-  text-decoration: none;
+.collapse {
+  // height: 1000px;
+  // overflow-y: scroll;
+  // overflow-x: hidden;
+
+  &-toggle {
+    display: flex;
+    width: 100%;
+    padding: var(--bs-list-group-item-padding-y) var(--bs-list-group-item-padding-x);
+    justify-content: start;
+    align-items: start;
+    text-decoration: none;
+    height: $toggle-height;
+
+    & span {
+      @extend .container;
+    }
+  }
 }
 
 .project-img {
-  position: absolute;
-  top: 0;
-  left: 0;
   width: 100%;
   object-fit: cover;
   object-position: top center;
+
+  &-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: calc(100vh - $toggle-height - 2rem);
+    // overflow: hidden;
+  }
 }

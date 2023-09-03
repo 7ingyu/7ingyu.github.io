@@ -1,7 +1,8 @@
-import { useState, useEffect, MouseEvent } from 'react';
-import { Collapse } from 'bootstrap';
+import { Tween, Timeline, ScrollTrigger } from 'react-gsap';
+import ProjectContent from './ProjectContent';
+import { useEffect, useState } from 'react';
 
-interface ProjectProps {
+export interface ProjectProps {
   "idx": number;
   "name": string;
   "img": string;
@@ -10,75 +11,31 @@ interface ProjectProps {
   // "teamsize": number;
   "desc": Array<string>;
   "tech": Array<string>;
+  "color": string;
 }
 
-const Project = ({
-  idx,
-  name,
-  img,
-  url,
-  // title,
-  // teamsize,
-  desc,
-  tech,
-}: ProjectProps) => {
-  const collapseId = `collapse-${idx}-${name.toLowerCase()}`;
+const Project = (props: ProjectProps) => {
+  const [ animation, setAnimation ] = useState<boolean>(false);
 
-  const [ collapse, setCollapse ] = useState<Collapse | null>(null);
-
-  useEffect(() => {
-    const el = document.querySelector('#' + collapseId);
-    if (el) setCollapse(new Collapse(el, {toggle: false}));
-  }, [collapseId])
-
-  const handleCollapse = (e: MouseEvent<HTMLAnchorElement>) => {
-    e.preventDefault();
-    collapse?.toggle();
-  }
+  // useEffect(() => {
+  //   console.log(animation);
+  // }, [animation])
 
   return (
-    <section>
-      <a
-        className="nav-collapse-toggle"
+    <ScrollTrigger
+      trigger="section"
+      start="top center"
+      end="8500px center"
+      // markers={true}
+      scrub={0.5}
+    >
+      <Timeline target={<ProjectContent {...props} setAnimation={setAnimation} />} enabled={animation} >
+        <Tween from={{fontSize: '1rem'}} to={{fontSize: '3rem'}} target="header" position="1" />
 
-        href={`#${name.toLowerCase()}`}
-        onClick={handleCollapse}
-      >
-        <span>{name}</span>
-      </a>
-      <div className="collapse" id={collapseId}>
-        <div className="container">
-          <div className="row">
-            <div className={`col-12 col-md-6 order-${idx % 2 ? 1 : 2}`}>
-              <h3><a href={url}>{url}</a></h3>
-              <h4>
-                {tech.map((item, i) =>
-                  <span
-                    key={`project-${idx}-tech-${i}-${item}`}
-                    className="badge bg-primary"
-                  >
-                    {item}
-                  </span>
-                )}
-              </h4>
-              {desc.map((p, i) => (
-                <p key={`project-${idx}-desc-${i}`}>{p}</p>
-              ))}
-            </div>
-            <div className={`col-12 col-md-6 order-${idx % 2 ? 2 : 1} position-relative overflow-hidden`}>
-              <div>
-                <a href={url}>
-                  <picture>
-                    <source media="(max-width: 768px)" srcSet={`${img}-sm.png`} />
-                    <img className="project-img" src={`${img}.png`} alt={`screenshot of ${name} application`} />
-                  </picture>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+        <Tween from={{ height: '100vh', width: '100vw' }} to={{ height: '100vh', width: '50%' }} target="img" position="2" />
+        <Tween from={{ height: '100vh', width: '100vw' }} to={{ height: '100vh', width: '50%' }} target="content"/>
+      </Timeline>
+    </ScrollTrigger>
   );
 };
 
