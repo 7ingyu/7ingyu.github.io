@@ -1,75 +1,74 @@
-import { MouseEventHandler, MouseEvent, RefObject, forwardRef, useImperativeHandle, useRef, useState, LegacyRef, useEffect } from 'react';
-import { Tween, Timeline, ScrollTrigger } from 'react-gsap';
+import { MouseEvent, RefObject, forwardRef, useImperativeHandle, useRef, useState } from 'react';
+import { Timeline } from 'react-gsap';
 import { ProjectProps } from './Project';
-import ProjectContent from './ProjectContent';
-import projects from '@/data/projects.json';
+import ProjectScroll from './ProjectScroll';
 
 interface References {
   section: RefObject<HTMLElement>;
   bg: RefObject<HTMLDivElement>;
-  header: RefObject<HTMLAnchorElement>;
-  content: LegacyRef<ScrollTrigger>;
+  header: RefObject<HTMLHeadingElement>;
+  link: RefObject<HTMLAnchorElement>;
+  // content: RefObject<HTMLDivElement>;
 }
 
 type ProjectTimelineProps = ProjectProps & {
-  handleClick: MouseEventHandler<HTMLAnchorElement>,
+  handleClick: () => void,
   timeline: RefObject<Timeline>
 };
 
 const ProjectCollapse = forwardRef((
-  { timeline, handleClick, idx, name, color, ...props }: ProjectTimelineProps,
+  { handleClick, idx, name, color, ...props }: ProjectTimelineProps,
   ref
 ) => {
 
-  const scrolltrigger: RefObject<ScrollTrigger> = useRef(null);
   const [ collapsed, setCollapsed ] = useState<boolean>(true);
 
   const references: References = {
     section: useRef(null),
     header: useRef(null),
-    bg: useRef(null),
-    content: useRef(null)
+    link: useRef(null),
+    bg: useRef(null)
   };
 
   useImperativeHandle(ref, () => (references));
 
-  useEffect(() => {
-    scrolltrigger.current?.getGSAP().disable();
-  })
-
   const handleHeaderClick = (event: MouseEvent<HTMLAnchorElement>) => {
-    if (collapsed) {
-      scrolltrigger.current?.getGSAP().enable();
-    } else {
-      scrolltrigger.current?.getGSAP().disable();
-    }
-    handleClick(event);
-    setCollapsed(!collapsed);
+    event.preventDefault();
+    handleClick();
+    setTimeout(() => setCollapsed(!collapsed), 1000);
   }
 
   return (
     <>
-      <section
-        ref={references.section}
-        id={`project-${idx}-${name.toLowerCase()}`}
+      <h2
+        className='project-header m-0 p-0'
+        ref={references.header}
         style={{
           backgroundColor: `var(--bs-${color})`,
+          zIndex: collapsed ? idx + 1 : 100,
         }}
+        id={`toggle-${idx}-${name.toLowerCase()}`}
       >
-          <a
-            id={`toggle-${idx}-${name.toLowerCase()}`}
-            className='project-header'
-            ref={references.header}
-            href={`#${name.toLowerCase()}`}
-            onClick={handleHeaderClick}
-            aria-controls={`collapse-${idx}-${name.toLowerCase()}`}
-            aria-expanded={!collapsed}
-            style={{
-              backgroundColor: `var(--bs-${color})`,
-            }}
-          >
-            <span >{name}</span>
-          </a>
+        <a
+          ref={references.link}
+          href={`#${name.toLowerCase()}`}
+          onClick={handleHeaderClick}
+          aria-controls={`collapse-${idx}-${name.toLowerCase()}`}
+          aria-expanded={!collapsed}
+          style={{
+            backgroundColor: `var(--bs-${color})`,
+          }}
+        >
+          <span >{name}</span>
+        </a>
+      </h2>
+      <section
+        id={`project-${idx}-${name}-section`}
+        ref={references.bg}
+        className="project-section bg-primary"
+        style={{zIndex: idx}}
+      >
+        <ProjectScroll {...{handleClick, idx, name, color, ...props}} />
       </section>
     </>
   );

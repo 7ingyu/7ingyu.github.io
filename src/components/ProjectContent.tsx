@@ -1,4 +1,4 @@
-import { forwardRef, useRef, useImperativeHandle, RefObject, MutableRefObject } from 'react';
+import { forwardRef, useRef, useImperativeHandle, RefObject } from 'react';
 import { ProjectProps } from './Project';
 import projects from '@/data/projects.json';
 
@@ -17,8 +17,7 @@ const ProjectContent = forwardRef(({
   // title,
   // teamsize,
   desc,
-  tech,
-  color,
+  tech
 }: ProjectProps, ref) => {
 
   const references: References = {

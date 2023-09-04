@@ -22,39 +22,13 @@ const ProjectScroll = (
   // ref
 ) => {
 
-  // const scrolltrigger: RefObject<ScrollTrigger> = useRef(null);
-  // const [ collapsed, setCollapsed ] = useState<boolean>(true);
-
-  // const references: References = {
-  //   section: useRef(null),
-  //   header: useRef(null),
-  //   bg: useRef(null),
-  //   content: useRef(null)
-  // };
-
-  // useImperativeHandle(ref, () => (references));
-
-  // useEffect(() => {
-  //   scrolltrigger.current?.getGSAP().disable();
-  // })
-
-  // const handleHeaderClick = (event: MouseEvent<HTMLAnchorElement>) => {
-  //   if (collapsed) {
-  //     scrolltrigger.current?.getGSAP().enable();
-  //   } else {
-  //     scrolltrigger.current?.getGSAP().disable();
-  //   }
-  //   handleClick(event);
-  //   setCollapsed(!collapsed);
-  // }
-
   return (
       <ScrollTrigger
         // ref={scrolltrigger}
-        trigger={`#project-${idx}-${name}-bg`}
+        trigger={`#project-${idx}-${name}-section`}
         start="top 300px"
         end="6000px bottom"
-        markers={true}
+        // markers={true}
         scrub={0.5}
         // pin={true}
       >

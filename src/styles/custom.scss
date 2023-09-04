@@ -19,95 +19,38 @@ body {
   overflow-x: hidden;
 }
 
-section {
-  position: fixed;
-  // min-height: 2rem;
-  width: 100%;
-  overflow: hidden;
-}
+.project {
+  &-header {
+    position: fixed;
+    min-height: 2rem;
+    overflow: hidden;
+    width: 100%;
+    display: flex;
+    // align-items: center;
 
-.project-header {
-  position: fixed;
-  min-height: 2rem;
-  overflow: hidden;
-  width: 100%;
-  z-index: 100;
-  display: flex;
-  align-items: center;
-  text-decoration: none;
+    > a {
+      width: 100%;
+      height: 2rem;
+      display: flex;
+      align-items: center;
+      text-decoration: none;
 
-  & span {
-    @extend .container;
-    color: white;
+      > span {
+        @extend .container;
+        color: white;
+      }
+    }
   }
-}
 
-.project-bg {
-  height: 300vh;
-  display: none;
+  &-section {
+    position: absolute;
+    overflow: hidden;
+  }
 }
 
 .project-content-container {
   position: sticky;
   width: 100vw;
   top: 3rem;
-  z-index: 1;
   height: 100vh;
-
-  // & * {
-  //   position: relative;
-  //   width: 100%;
-  //   top: 0;
-  //   left: 0;
-  // }
 }
-
-// main {
-  // position: relative;
-  // min-height: 100vh;
-// }
-
-// .nav-collapse {
-//   padding: 0;
-//   border-radius: 0 !important;
-//   z-index: 100;
-//   overflow: scroll;
-// }
-
-// .collapse {
-//   // height: 1000px;
-//   // overflow-y: scroll;
-//   // overflow-x: hidden;
-
-//   &-toggle {
-//     display: flex;
-//     width: 100%;
-//     padding: var(--bs-list-group-item-padding-y) var(--bs-list-group-item-padding-x);
-//     justify-content: start;
-//     align-items: start;
-//     text-decoration: none;
-
-//     & span {
-//       @extend .container;
-//     }
-//   }
-// }
-
-// .project {
-//   &-content-container {
-//     overflow: hidden;
-//   }
-//   &-img {
-//     width: 100%;
-//     object-fit: cover;
-//     object-position: top center;
-
-//     &-container {
-//       position: absolute;
-//       top: 0;
-//       left: 0;
-//       width: 100vw;
-//       // overflow: hidden;
-//     }
-//   }
-// }
