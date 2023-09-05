@@ -1,6 +1,5 @@
 import { forwardRef, useRef, useImperativeHandle, RefObject } from 'react';
 import { ProjectProps } from './Project';
-import projects from '@/data/projects.json';
 
 interface References {
   container: RefObject<HTMLDivElement>;
@@ -47,12 +46,12 @@ const ProjectContent = forwardRef(({
           ref={references.img}
         >
           <div>
-            <a href={url}>
+            {/* <a href={url}> */}
               <picture>
                 <source media="(max-width: 768px)" srcSet={`${img}-sm.png`} />
                 <img className="project-img img-fluid" src={`${img}.png`} alt={`screenshot of ${name} application`} />
               </picture>
-            </a>
+            {/* </a> */}
           </div>
         </div>
 

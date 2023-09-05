@@ -12,7 +12,7 @@ interface References {
 }
 
 type ProjectTimelineProps = ProjectProps & {
-  handleClick: () => void,
+  handleClick: (idx: number) => void,
   // timeline: RefObject<Timeline>,
   open: boolean
 };
@@ -32,7 +32,7 @@ const ProjectCollapse = forwardRef((
 
   const handleHeaderClick = (event: MouseEvent<HTMLAnchorElement>) => {
     event.preventDefault();
-    handleClick();
+    handleClick(idx);
   }
 
   // useEffect(() => {
@@ -66,22 +66,6 @@ const ProjectCollapse = forwardRef((
           <span >{name}</span>
         </a>
       </h2>
-      <section
-        id={`project-${idx}-${name}-bg`}
-        ref={references.bg}
-        className="project-bg"
-        style={{
-          // backgroundColor: `var(--bs-${color})`,
-          backgroundColor: 'red',
-          zIndex: idx
-        }}
-      >
-        {/* {open
-          ? <ProjectScroll {...{idx, name, color, ...props}} />
-          : <ProjectContent {...{idx, name, color, ...props}} />
-        } */}
-        <ProjectScroll {...{open, idx, name, color, ...props}} />
-      </section>
     </>
   );
 });

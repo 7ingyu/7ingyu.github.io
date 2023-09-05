@@ -1,6 +1,6 @@
 // import React, { useEffect, useState, MouseEvent, ComponentType } from 'react';
 // import { Collapse } from 'bootstrap';
-import { Project } from './components';
+import {Landing, About, Project} from './components';
 import projects from './data/projects.json';
 
 // const components: { [key: string]: React.ComponentType } = {
@@ -19,11 +19,12 @@ const App = () => {
           </a>
         </h1>
       </header>
-      <main>
+      {/* <main>
         {projects.map((proj, idx) => (
-          <Project {...{idx, ...proj}} key={`project-${idx}`}/>
+          idx && <Project {...{idx, ...proj}} key={`project-${idx}`}/>
         ))}
-      </main>
+      </main> */}
+      <Project />
       <footer>
         {/* Contact Info Here*/}
       </footer>

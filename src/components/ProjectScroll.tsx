@@ -4,7 +4,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import { ProjectProps } from './Project';
 import ProjectContent from './ProjectContent';
-import { containerKeys, imgKeys } from '@/utils/animation';
+import { imgKeys } from '@/utils/animation';
 
 // interface References {
 //   section: RefObject<HTMLElement>;
@@ -28,7 +28,7 @@ const ProjectScroll = ({ open, idx, name, color, ...props }: ProjectScrollProps)
     gsap.registerPlugin(ScrollTrigger);
     const trigger = ScrollTrigger.create({
       animation: timeline.current?.getGSAP(),
-      trigger: `#project-${idx}-${name}-bg`,
+      trigger: 'main',
       start: "top 10px",
       end: "+=6000px",
       fastScrollEnd: 3000,
@@ -37,7 +37,7 @@ const ProjectScroll = ({ open, idx, name, color, ...props }: ProjectScrollProps)
         console.log("progress:", self.progress.toFixed(3), "direction:", self.direction, "velocity", self.getVelocity());
       },
       pin: true,
-      pinnedContainer: `#project-${idx}-${name}-bg`,
+      // pinnedContainer: 'main',
       preventOverlaps: true,
       scrub: 0.5,
       snap: "labels",
@@ -59,8 +59,8 @@ const ProjectScroll = ({ open, idx, name, color, ...props }: ProjectScrollProps)
       target={<ProjectContent {...{idx, name, color, ...props}} />}
       playState={PlayState.pause}
     >
-      {/* <Tween target="img" position={1} duration={1} from={img[0]} to={img[1]} />
-      <Tween target="img" position={2} duration={1} from={img[1]} to={img[0]} /> */}
+      <Tween target="img" position={1} duration={1} from={img[0]} to={img[1]} />
+      <Tween target="img" position={2} duration={1} from={img[1]} to={img[0]} />
     </Timeline>
   );
 };
