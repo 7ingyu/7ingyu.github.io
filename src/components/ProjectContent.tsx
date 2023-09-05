@@ -15,7 +15,7 @@ const ProjectContent = forwardRef(({
   idx,
   name,
   img,
-  url,
+  // url,
   color,
   // title,
   // teamsize,

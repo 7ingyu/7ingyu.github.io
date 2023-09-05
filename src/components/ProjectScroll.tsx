@@ -65,16 +65,22 @@ const ProjectScroll = ({ open, idx, name, color, ...props }: ProjectScrollProps)
       <Tween target="img" position={0} duration={0} to={img[0]} />
       <Tween target="preview" position={0} duration={0} to={{x: '-100vw'}} />
       <Tween target="desc" position={0} duration={0} to={{x: '100vw'}} />
+      <Tween target="badges" position={0} duration={0} to={{y: '-100vh', opacity: 0}} />
 
-      <Tween target="desc" position={1} duration={1} to={{x: '0'}} />
-      <Tween target="preview" position={1} duration={1} to={{x: '0'}} />
+      <Tween target="img" position={1} duration={1} to={img[1]} />
+      <Tween target="preview" position={1} duration={0} to={{opacity: 1}} />
+      <Tween target="desc" position={1} duration={0} to={{opacity: 1}} />
+      <Tween target="badges" position={1} duration={0} to={{opacity: 1}} />
 
-      <Tween target="badges" position={2} duration={4} from={{y: '-100vh'}} to={{y: '0'}} stagger={0.5}/>
-      <Tween target="badges" position={6} duration={1} from={{y: '0'}} to={{y: '0'}} />
+      <Tween target="desc" position={2} duration={1} to={{x: '0'}} />
+      <Tween target="preview" position={2} duration={1} to={{x: '0'}} />
 
-      <Tween target="desc" position={7} duration={2} to={{opacity: 0}}/>
-      <Tween target="preview" position={7} duration={2} to={{opacity: 0}}/>
-      <Tween target="img" position={7} duration={2} to={img[1]} />
+      <Tween target="badges" position={3} duration={4} to={{y: '0'}} stagger={0.5}/>
+      <Tween target="badges" position={7} duration={1} from={{y: '0'}} to={{y: '0'}} />
+
+      <Tween target="desc" position={8} duration={2} to={{opacity: 0}}/>
+      <Tween target="preview" position={8} duration={2} to={{opacity: 0}}/>
+      <Tween target="img" position={8} duration={2} to={img[2]} />
     </Timeline>
   );
 };

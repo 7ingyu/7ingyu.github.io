@@ -1,7 +1,6 @@
 // import React, { useEffect, useState, MouseEvent, ComponentType } from 'react';
 // import { Collapse } from 'bootstrap';
-import {Landing, About, Project} from './components';
-import projects from './data/projects.json';
+import { Project } from './components';
 
 // const components: { [key: string]: React.ComponentType } = {
 //   Landing, About

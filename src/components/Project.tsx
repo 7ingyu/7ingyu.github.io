@@ -1,4 +1,4 @@
-import { RefObject, useRef, useState, useEffect, useCallback } from 'react';
+import { RefObject, useRef, useState, useEffect } from 'react';
 import { Tween, Timeline, PlayState } from 'react-gsap';
 import ProjectCollapse from './ProjectCollapse';
 import ProjectScroll from './ProjectScroll';
