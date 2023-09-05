@@ -1,22 +1,19 @@
-// $header-height: 3rem;
-// $toggle-height: 2rem;
+::-webkit-scrollbar {
+  display: none;
+}
 
-// ::-webkit-scrollbar {
-//   display: none;
-// }
+* {
+  scrollbar-width: none;
+}
 
-// * {
-//   scrollbar-width: none;
-// }
-
-// .viewport {
-//   height: 100vh;
-//   overflow-y: scroll;
-// }
 body {
   min-height: 100vh;
   overflow-y: scroll;
   overflow-x: hidden;
+}
+
+header {
+  height: 3rem;
 }
 
 .project {
@@ -43,14 +40,15 @@ body {
   }
 
   &-section {
-    position: absolute;
+  }
+
+  &-content-container {
+    width: 100vw;
+    top: 3rem;
     overflow: hidden;
   }
 }
 
-.project-content-container {
-  position: sticky;
-  width: 100vw;
-  top: 3rem;
-  height: 100vh;
+.pin-spacer {
+  top: 0;
 }

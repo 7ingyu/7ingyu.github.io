@@ -6,12 +6,23 @@ const bgKeys = ({ idx }: { idx: number }) => {
     {
       height: '0px',
       top: `calc(100vh - ${(projects.length - idx -1) * 2}rem)`,
+      overflow: 'hidden',
+      position: 'relative',
     },
     // 1 completely expanded
     {
       height: `6000px`,
-      top: '3rem',
+      top: '0rem',
+      overflow: null,
+      position: 'relative',
     },
+    // 2 just there for scrolling purposes
+    // {
+    //   height: `6000px`,
+    //   top: '0',
+    //   overflow: null,
+    //   position: 'relative',
+    // }
   ]
 };
 

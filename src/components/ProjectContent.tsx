@@ -35,9 +35,9 @@ const ProjectContent = forwardRef(({
       <div
         className="project-content-container"
         ref={references.container}
-        id={`collapse-${idx}-${name.toLowerCase()}`}
+        id={`project-container-${idx}-${name.toLowerCase()}`}
         style={{
-          height: `calc(100vh - ${(projects.length - idx - 1) * 2}rem - 3rem)`,
+          // height: `calc(100vh - ${(projects.length - idx - 1) * 2}rem - 3rem)`,
           // bottom: `${(projects.length - idx - 1) * 2}rem`
         }}
       >

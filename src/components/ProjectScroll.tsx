@@ -1,8 +1,10 @@
-import { MouseEventHandler, MouseEvent, RefObject, forwardRef, useImperativeHandle, useRef, useState, LegacyRef, useEffect } from 'react';
-import { Tween, Timeline, ScrollTrigger } from 'react-gsap';
+import { RefObject, useRef, useEffect, useState } from 'react';
+import { Tween, Timeline, PlayState } from 'react-gsap';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import { ProjectProps } from './Project';
 import ProjectContent from './ProjectContent';
-import projects from '@/data/projects.json';
+import { containerKeys, imgKeys } from '@/utils/animation';
 
 // interface References {
 //   section: RefObject<HTMLElement>;
@@ -11,57 +13,55 @@ import projects from '@/data/projects.json';
 //   content: LegacyRef<ScrollTrigger>;
 // }
 
-// type ProjectScrollProps = ProjectProps & {
-//   handleClick: MouseEventHandler<HTMLAnchorElement>,
-//   timeline: RefObject<Timeline>
-// };
+type ProjectScrollProps = ProjectProps & {
+  open: boolean
+};
 
-const ProjectScroll = (
-// forwardRef((
-  { idx, name, color, ...props }: ProjectProps,
-  // ref
-) => {
+const ProjectScroll = ({ open, idx, name, color, ...props }: ProjectScrollProps) => {
+  const timeline: RefObject<Timeline> = useRef(null);
+  const [ scrolltrigger, setScrolltrigger ] = useState<ScrollTrigger | null>(null);
+
+  const img = imgKeys();
+  // const container = containerKeys({idx});
+
+  useEffect(() => {
+    gsap.registerPlugin(ScrollTrigger);
+    const trigger = ScrollTrigger.create({
+      animation: timeline.current?.getGSAP(),
+      trigger: `#project-${idx}-${name}-bg`,
+      start: "top 10px",
+      end: "+=6000px",
+      fastScrollEnd: 3000,
+      onToggle: self => console.log("toggled, isActive:", self.isActive),
+      onUpdate: self => {
+        console.log("progress:", self.progress.toFixed(3), "direction:", self.direction, "velocity", self.getVelocity());
+      },
+      pin: true,
+      pinnedContainer: `#project-${idx}-${name}-bg`,
+      preventOverlaps: true,
+      scrub: 0.5,
+      snap: "labels",
+    });
+    setScrolltrigger(trigger);
+  }, [idx, name])
+
+  useEffect(() => {
+    if (open) {
+      scrolltrigger?.enable(true);
+    } else {
+      scrolltrigger?.disable(true);
+    }
+  }, [scrolltrigger, open])
 
   return (
-      <ScrollTrigger
-        // ref={scrolltrigger}
-        trigger={`#project-${idx}-${name}-section`}
-        start="top 300px"
-        end="6000px bottom"
-        // markers={true}
-        scrub={0.5}
-        // pin={true}
-      >
-        <Timeline target={<ProjectContent {...{idx, name, color, ...props}} />} >
-          <Tween
-            target="img"
-            from={{
-              width: '100%',
-            }}
-            to={{
-              width: '50%',
-            }}
-          />
-                    {/* <Tween
-            target="container"
-            from={{
-              height: '0px'
-            }}
-            to={{
-              height: `calc(100vh - ${(projects.length - idx - 1) * 2}rem - 3rem)`
-            }}
-            position="0"
-            duration={0}
-          /> */}
-          {/* <Tween
-            target="badges"
-            from={{ y: '10px', opacity: '0' }}
-            to={{ x: '0px', opacity: '1' }}
-            stagger={0.1}
-            position="0"
-          /> */}
-        </Timeline>
-      </ScrollTrigger>
+    <Timeline
+      ref={timeline}
+      target={<ProjectContent {...{idx, name, color, ...props}} />}
+      playState={PlayState.pause}
+    >
+      {/* <Tween target="img" position={1} duration={1} from={img[0]} to={img[1]} />
+      <Tween target="img" position={2} duration={1} from={img[1]} to={img[0]} /> */}
+    </Timeline>
   );
 };
 

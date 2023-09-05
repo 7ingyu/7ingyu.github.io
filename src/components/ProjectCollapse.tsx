@@ -2,9 +2,9 @@ import { MouseEvent, RefObject, forwardRef, useImperativeHandle, useRef, useStat
 import { Timeline } from 'react-gsap';
 import { ProjectProps } from './Project';
 import ProjectScroll from './ProjectScroll';
+import ProjectContent from './ProjectContent';
 
 interface References {
-  section: RefObject<HTMLElement>;
   bg: RefObject<HTMLDivElement>;
   header: RefObject<HTMLHeadingElement>;
   link: RefObject<HTMLAnchorElement>;
@@ -13,18 +13,16 @@ interface References {
 
 type ProjectTimelineProps = ProjectProps & {
   handleClick: () => void,
-  timeline: RefObject<Timeline>
+  // timeline: RefObject<Timeline>,
+  open: boolean
 };
 
 const ProjectCollapse = forwardRef((
-  { handleClick, idx, name, color, ...props }: ProjectTimelineProps,
+  { handleClick, open, idx, name, color, ...props }: ProjectTimelineProps,
   ref
 ) => {
 
-  const [ collapsed, setCollapsed ] = useState<boolean>(true);
-
   const references: References = {
-    section: useRef(null),
     header: useRef(null),
     link: useRef(null),
     bg: useRef(null)
@@ -35,8 +33,14 @@ const ProjectCollapse = forwardRef((
   const handleHeaderClick = (event: MouseEvent<HTMLAnchorElement>) => {
     event.preventDefault();
     handleClick();
-    setTimeout(() => setCollapsed(!collapsed), 1000);
   }
+
+  // useEffect(() => {
+  //   const container = document.querySelector(`project-container-${idx}-${name.toLowerCase()}`) as HTMLElement;
+  //   if (collapsed) {
+  //     container?.style.setProperty('position', 'fixed');
+  //   }
+  // }, [collapsed])
 
   return (
     <>
@@ -45,7 +49,7 @@ const ProjectCollapse = forwardRef((
         ref={references.header}
         style={{
           backgroundColor: `var(--bs-${color})`,
-          zIndex: collapsed ? idx + 1 : 100,
+          zIndex: !open ? idx + 1 : 100,
         }}
         id={`toggle-${idx}-${name.toLowerCase()}`}
       >
@@ -54,7 +58,7 @@ const ProjectCollapse = forwardRef((
           href={`#${name.toLowerCase()}`}
           onClick={handleHeaderClick}
           aria-controls={`collapse-${idx}-${name.toLowerCase()}`}
-          aria-expanded={!collapsed}
+          aria-expanded={open}
           style={{
             backgroundColor: `var(--bs-${color})`,
           }}
@@ -63,12 +67,20 @@ const ProjectCollapse = forwardRef((
         </a>
       </h2>
       <section
-        id={`project-${idx}-${name}-section`}
+        id={`project-${idx}-${name}-bg`}
         ref={references.bg}
-        className="project-section bg-primary"
-        style={{zIndex: idx}}
+        className="project-bg"
+        style={{
+          // backgroundColor: `var(--bs-${color})`,
+          backgroundColor: 'red',
+          zIndex: idx
+        }}
       >
-        <ProjectScroll {...{handleClick, idx, name, color, ...props}} />
+        {/* {open
+          ? <ProjectScroll {...{idx, name, color, ...props}} />
+          : <ProjectContent {...{idx, name, color, ...props}} />
+        } */}
+        <ProjectScroll {...{open, idx, name, color, ...props}} />
       </section>
     </>
   );
