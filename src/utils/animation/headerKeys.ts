@@ -18,14 +18,14 @@ const headerKeys = ({ idx, color }: { idx: number; color: string }) => {
     },
     // 2 shrunk at top
     {
-      height: '3rem',
+      height: '50px',
       bottom: `calc(100vh - 3rem)`,
       backgroundColor: `var(--bs-${color})`,
       alignItems: 'center'
     },
     // 3 swap to transparent bg
     {
-      height: '3rem',
+      height: '50px',
       bottom: `calc(100vh - 3rem)`,
       backgroundColor: `transparent`,
       alignItems: 'end'

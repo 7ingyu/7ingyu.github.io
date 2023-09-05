@@ -11,7 +11,7 @@ const bgKeys = ({ idx }: { idx: number }) => {
     },
     // 1 completely expanded
     {
-      height: `6000px`,
+      height: `100vh`,
       top: '0rem',
       overflow: null,
       position: 'relative',

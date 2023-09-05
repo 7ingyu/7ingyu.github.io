@@ -29,20 +29,21 @@ const ProjectScroll = ({ open, idx, name, color, ...props }: ProjectScrollProps)
   }, [])
 
   useEffect(() => {
+    // return;
     if (open && !scrolltrigger) {
       // console.log('scroll created');
       const trigger = ScrollTrigger.create({
         animation: timeline.current?.getGSAP(),
         trigger: 'main',
-        start: "top 10px",
-        end: "+=6000px",
+        start: "top 50px",
+        // end: "+=6000px",
         fastScrollEnd: 3000,
         onToggle: self => console.log("toggled, isActive:", self.isActive),
         onUpdate: self => {
           console.log("progress:", self.progress.toFixed(3), "direction:", self.direction, "velocity", self.getVelocity());
         },
         pin: true,
-        pinnedContainer: 'main',
+        // pinnedContainer: 'main',
         preventOverlaps: true,
         scrub: 0.5,
         snap: "labels",
@@ -61,8 +62,19 @@ const ProjectScroll = ({ open, idx, name, color, ...props }: ProjectScrollProps)
       target={<ProjectContent {...{idx, name, color, ...props}} />}
       playState={PlayState.pause}
     >
-      <Tween target="img" position={1} duration={1} from={img[0]} to={img[1]} />
-      <Tween target="img" position={2} duration={1} from={img[1]} to={img[0]} />
+      <Tween target="img" position={0} duration={0} to={img[0]} />
+      <Tween target="preview" position={0} duration={0} to={{x: '-100vw'}} />
+      <Tween target="desc" position={0} duration={0} to={{x: '100vw'}} />
+
+      <Tween target="desc" position={1} duration={1} to={{x: '0'}} />
+      <Tween target="preview" position={1} duration={1} to={{x: '0'}} />
+
+      <Tween target="badges" position={2} duration={4} from={{y: '-100vh'}} to={{y: '0'}} stagger={0.5}/>
+      <Tween target="badges" position={6} duration={1} from={{y: '0'}} to={{y: '0'}} />
+
+      <Tween target="desc" position={7} duration={2} to={{opacity: 0}}/>
+      <Tween target="preview" position={7} duration={2} to={{opacity: 0}}/>
+      <Tween target="img" position={7} duration={2} to={img[1]} />
     </Timeline>
   );
 };

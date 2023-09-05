@@ -123,8 +123,8 @@ const Project = () => {
                 id={`project-${idx}-${name.toLowerCase()}-bg`}
                 className="project-bg"
                 style={{
-                  backgroundColor: `var(--bs-${color})`,
-                  // backgroundColor: 'red',
+                  // backgroundColor: `var(--bs-${color})`,
+                  backgroundColor: 'black',
                   zIndex: open[idx] ? 1 : 0
                 }}
               >

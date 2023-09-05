@@ -43,9 +43,44 @@ header {
   }
 
   &-content-container {
-    width: 100vw;
-    top: 3rem;
-    overflow: hidden;
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &-img-container {
+    width: 100%;
+    filter: blur(10px) brightness(0.5);
+  }
+
+  &-preview-img {
+    // position: absolute;
+    // left: 0;
+    // top: 0;
+    // width: 100%;
+    // overflow: hidden;
+    min-height: 200px;
+    // padding-bottom: 1rem;
+
+    & img {
+      @extend .card;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+    }
+  }
+
+  &-desc-card {
+    @extend .card;
+    background-color: white;
+    // width: clamp(100%);
   }
 }
 

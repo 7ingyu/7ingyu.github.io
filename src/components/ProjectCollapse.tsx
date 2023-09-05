@@ -11,7 +11,8 @@ interface References {
 type ProjectTimelineProps = ProjectProps & {
   handleClick: (idx: number) => void,
   // timeline: RefObject<Timeline>,
-  open: Array<boolean>
+  open: Array<boolean>,
+  toAnimate: Array<number>,
 };
 
 const ProjectCollapse = forwardRef((

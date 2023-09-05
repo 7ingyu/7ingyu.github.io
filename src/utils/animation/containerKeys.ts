@@ -5,13 +5,13 @@ const containerKeys = ({ idx }: { idx: number }) => {
     // before animation
     {
       position: 'relative',
-      height: `calc(100vh - ${(projects.length - idx -1) * 2}rem - 3rem)`,
+      height: `calc(100vh - ${(projects.length - idx -1) * 2}rem - 50px)`,
       top: '0px',
     },
     // pin page
     {
       position: 'fixed',
-      height: `calc(100vh - ${(projects.length - idx -1) * 2}rem - 3rem)`,
+      height: `calc(100vh - ${(projects.length - idx -1) * 2}rem - 50px)`,
       top: '3rem',
     }
   ];
