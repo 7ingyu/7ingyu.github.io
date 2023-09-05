@@ -26,30 +26,32 @@ const ProjectScroll = ({ open, idx, name, color, ...props }: ProjectScrollProps)
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
-    const trigger = ScrollTrigger.create({
-      animation: timeline.current?.getGSAP(),
-      trigger: 'main',
-      start: "top 10px",
-      end: "+=6000px",
-      fastScrollEnd: 3000,
-      onToggle: self => console.log("toggled, isActive:", self.isActive),
-      onUpdate: self => {
-        console.log("progress:", self.progress.toFixed(3), "direction:", self.direction, "velocity", self.getVelocity());
-      },
-      pin: true,
-      pinnedContainer: 'main',
-      preventOverlaps: true,
-      scrub: 0.5,
-      snap: "labels",
-    });
-    setScrolltrigger(trigger);
-  }, [idx, name])
+  }, [])
 
   useEffect(() => {
-    if (open) {
-      scrolltrigger?.enable(true);
-    } else {
-      scrolltrigger?.disable(true);
+    if (open && !scrolltrigger) {
+      // console.log('scroll created');
+      const trigger = ScrollTrigger.create({
+        animation: timeline.current?.getGSAP(),
+        trigger: 'main',
+        start: "top 10px",
+        end: "+=6000px",
+        fastScrollEnd: 3000,
+        onToggle: self => console.log("toggled, isActive:", self.isActive),
+        onUpdate: self => {
+          console.log("progress:", self.progress.toFixed(3), "direction:", self.direction, "velocity", self.getVelocity());
+        },
+        pin: true,
+        pinnedContainer: 'main',
+        preventOverlaps: true,
+        scrub: 0.5,
+        snap: "labels",
+      });
+      setScrolltrigger(trigger);
+    } else if (!open && !!scrolltrigger) {
+      // console.log('scroll killed');
+      scrolltrigger?.kill(true, true);
+      setScrolltrigger(null);
     }
   }, [scrolltrigger, open])
 
