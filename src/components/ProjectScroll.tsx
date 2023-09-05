@@ -37,7 +37,7 @@ const ProjectScroll = ({ open, idx, name, color, ...props }: ProjectScrollProps)
         console.log("progress:", self.progress.toFixed(3), "direction:", self.direction, "velocity", self.getVelocity());
       },
       pin: true,
-      // pinnedContainer: 'main',
+      pinnedContainer: 'main',
       preventOverlaps: true,
       scrub: 0.5,
       snap: "labels",

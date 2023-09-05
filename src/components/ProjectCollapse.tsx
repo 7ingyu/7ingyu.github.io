@@ -1,8 +1,5 @@
-import { MouseEvent, RefObject, forwardRef, useImperativeHandle, useRef, useState } from 'react';
-import { Timeline } from 'react-gsap';
+import { MouseEvent, RefObject, forwardRef, useImperativeHandle, useRef, useState, useEffect } from 'react';
 import { ProjectProps } from './Project';
-import ProjectScroll from './ProjectScroll';
-import ProjectContent from './ProjectContent';
 
 interface References {
   bg: RefObject<HTMLDivElement>;
@@ -14,13 +11,14 @@ interface References {
 type ProjectTimelineProps = ProjectProps & {
   handleClick: (idx: number) => void,
   // timeline: RefObject<Timeline>,
-  open: boolean
+  open: Array<boolean>
 };
 
 const ProjectCollapse = forwardRef((
-  { handleClick, open, idx, name, color, ...props }: ProjectTimelineProps,
+  { handleClick, toAnimate, open, idx, name, color }: ProjectTimelineProps,
   ref
 ) => {
+  const [ zIndex, setZIndex ] = useState<number>(0);
 
   const references: References = {
     header: useRef(null),
@@ -42,6 +40,25 @@ const ProjectCollapse = forwardRef((
   //   }
   // }, [collapsed])
 
+  useEffect(() => {
+    let z = 0
+    const current = open.indexOf(true);
+    let [ opening, closing ] = [-1, -1];
+    if (toAnimate.length > 1) {
+      [ closing, opening ] = toAnimate;
+    } else if (toAnimate.length) {
+      opening = toAnimate[0]
+    }
+    if ((open[idx] && closing !== idx) || opening === idx) {
+      z = 100;
+    } else if (opening > -1) {
+      if (idx > opening) z = 100;
+    } else if (opening === -1) {
+      if (idx > current) z = 100;
+    }
+    setZIndex(z);
+  }, [open, toAnimate, idx])
+
   return (
     <>
       <h2
@@ -49,7 +66,7 @@ const ProjectCollapse = forwardRef((
         ref={references.header}
         style={{
           backgroundColor: `var(--bs-${color})`,
-          zIndex: !open ? idx + 1 : 100,
+          zIndex,
         }}
         id={`toggle-${idx}-${name.toLowerCase()}`}
       >
@@ -58,7 +75,7 @@ const ProjectCollapse = forwardRef((
           href={`#${name.toLowerCase()}`}
           onClick={handleHeaderClick}
           aria-controls={`collapse-${idx}-${name.toLowerCase()}`}
-          aria-expanded={open}
+          aria-expanded={open[idx]}
           style={{
             backgroundColor: `var(--bs-${color})`,
           }}
