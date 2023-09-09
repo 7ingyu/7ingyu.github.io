@@ -5,7 +5,7 @@ import techLinks from '@/data/tech.json';
 interface References {
   badges: RefObject<HTMLDivElement>;
   header: RefObject<HTMLHeadingElement>;
-  link: RefObject<HTMLDivElement>;
+  link: RefObject<HTMLButtonElement>;
   // content: RefObject<HTMLDivElement>;
 }
 
@@ -31,7 +31,7 @@ const ProjectCollapse = forwardRef((
 
   useImperativeHandle(ref, () => (references));
 
-  const handleHeaderClick = (event: MouseEvent<HTMLDivElement>) => {
+  const handleHeaderClick = (event: MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
     handleClick(idx);
   }
@@ -66,8 +66,8 @@ const ProjectCollapse = forwardRef((
         }}
         id={`toggle-${idx}-${name.toLowerCase()}`}
       >
-        <div
-          className=""
+        <button
+          className="d-block"
           ref={references.link}
           onClick={handleHeaderClick}
           aria-controls={`collapse-${idx}-${name.toLowerCase()}`}
@@ -86,12 +86,12 @@ const ProjectCollapse = forwardRef((
                   {name}
                 </a>
               </div>
-              <div ref={references.badges} className="d-flex align-items-center h-100">
+              <div ref={references.badges} className="d-flex align-items-center h-100 py-1">
                 {tech.map((item, i) =>
                   <a
                     key={`project-${idx}-tech-${i}-${item}`}
                     href={links?.[item.toLowerCase()] || '#'}
-                    className="badge bg-white m-1 h-100"
+                    className="badge bg-white mx-1 h-100"
                     style={{color: `var(--bs-${color})`}}
                     // ref={el => references.badges.current?.push(el)}
                   >
@@ -101,7 +101,7 @@ const ProjectCollapse = forwardRef((
               </div>
             </div>
           </div>
-        </div>
+        </button>
       </h2>
     </>
   );

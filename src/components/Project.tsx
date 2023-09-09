@@ -110,6 +110,7 @@ const Project = () => {
             {/* Header slides down */}
             <Tween target="header" position={1} duration={0.5} to={headerKeys({idx, color})[4]} />
             <Tween target="link" position={1} duration={0.5} to={linkKeys()[0]} />
+            <Tween target="badges" position={1} duration={0.5} from={{ padding: "0.55rem 0" }} to={{ padding: "0.25rem 0" }} />
 
             <Tween target="header" position={1.5} duration={0} to={headerKeys({idx, color})[0]} />
           </Timeline>
