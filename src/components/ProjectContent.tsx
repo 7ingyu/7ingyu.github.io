@@ -53,11 +53,26 @@ const ProjectContent = forwardRef(({
       <div
         ref={references.content}
         className="project-content-container"
-        style={{ height: `calc(100vh - ${(projects.length - idx) * 2}rem - 6rem)` }}
+        style={{ height: `calc(100vh - ${(projects.length - idx) * 2}rem + 2rem - 50px)` }}
       >
         <div
           className='container'
         >
+
+          <div className="row">
+            <div className="d-flex align-items-center justify-content-center mb-3">
+              {tech.map((item, i) =>
+                <span
+                  key={`project-${idx}-tech-${i}-${item}`}
+                  className="badge m-1"
+                  style={{backgroundColor: `var(--bs-${color})`}}
+                  ref={el => references.badges.current?.push(el)}
+                >
+                  {item}
+                </span>
+              )}
+            </div>
+          </div>
 
           <div className="row">
             <div className="col-12 col-md-6 mb-3">
@@ -81,21 +96,6 @@ const ProjectContent = forwardRef(({
                   ))}
                 </div>
               </div>
-            </div>
-          </div>
-
-          <div className="row">
-            <div className="d-flex align-items-center justify-content-center mb-5">
-              {tech.map((item, i) =>
-                <span
-                  key={`project-${idx}-tech-${i}-${item}`}
-                  className="badge m-1"
-                  style={{backgroundColor: `var(--bs-${color})`}}
-                  ref={el => references.badges.current?.push(el)}
-                >
-                  {item}
-                </span>
-              )}
             </div>
           </div>
 

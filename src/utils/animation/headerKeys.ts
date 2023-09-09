@@ -7,21 +7,21 @@ const headerKeys = ({ idx, color }: { idx: number; color: string }) => {
       height: '2rem',
       bottom: `${(projects.length - idx - 1) * 2}rem`,
       backgroundColor: `var(--bs-${color})`,
-      alignItems: 'center'
+      alignItems: 'start'
     },
     // 1 expand up
     {
       height: `calc(100vh - ${(projects.length - idx - 1) * 2}rem)`,
       bottom: `${(projects.length - idx - 1) * 2}rem`,
       backgroundColor: `var(--bs-${color})`,
-      alignItems: 'center'
+      alignItems: 'start'
     },
     // 2 shrunk at top
     {
       height: '50px',
       bottom: `calc(100vh - 3rem)`,
       backgroundColor: `var(--bs-${color})`,
-      alignItems: 'center'
+      alignItems: 'start'
     },
     // 3 swap to transparent bg
     {

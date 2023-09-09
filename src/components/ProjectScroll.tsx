@@ -75,11 +75,14 @@ const ProjectScroll = ({ open, idx, name, color, ...props }: ProjectScrollProps)
       <Tween target="desc" position={2} duration={1} to={{x: '0'}} />
       <Tween target="preview" position={2} duration={1} to={{x: '0'}} />
 
-      <Tween target="badges" position={3} duration={4} to={{y: '0'}} stagger={0.5}/>
+      <Tween target="badges" position={3} duration={4} to={{y: '0'}} stagger={0.5} />
       <Tween target="badges" position={7} duration={1} from={{y: '0'}} to={{y: '0'}} />
 
-      <Tween target="desc" position={8} duration={2} to={{opacity: 0}}/>
-      <Tween target="preview" position={8} duration={2} to={{opacity: 0}}/>
+      {/* <Tween target="badges" position={7} duration={1} from={{x: '0'}} to={{x: '0'}} /> */}
+
+      <Tween target="desc" position={8} duration={2} to={{opacity: 0}} />
+      <Tween target="preview" position={8} duration={2} to={{opacity: 0}} />
+      <Tween target="badges" position={8} duration={2} from={{opacity: 1}} to={{opacity: 0}} />
       <Tween target="img" position={8} duration={2} to={img[2]} />
     </Timeline>
   );

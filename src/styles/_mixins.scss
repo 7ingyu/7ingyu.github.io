@@ -1,0 +1,85 @@
+@use "sass:list";
+
+@mixin breakpoint($class...) {
+  @each $class in $class {
+    @if $class == na {
+      @media (max-width: 359px) {
+        @content;
+      }
+    } @else if $class == xxs {
+      @media (max-width: 420px) {
+        @content;
+      }
+    } @else if $class == xs {
+      @media (max-width: 767px) {
+        @content;
+      }
+    } @else if $class == sm {
+      @media (min-width: 768px) and (max-width: 991px) {
+        @content;
+      }
+    } @else if $class == md {
+      @media (min-width: 992px) and (max-width: 1200px) {
+        @content;
+      }
+    } @else if $class == lg {
+      @media (min-width: 1200px) and (max-width: 1920px) {
+        @content;
+      }
+    } @else if $class == xl {
+      @media (min-width: 1920px) {
+        @content;
+      }
+    } @else if $class == mobile {
+      @include breakpoint(xs, sm) {
+        @content;
+      }
+    } @else if $class == desktop {
+      @include breakpoint(md, lg, xl) {
+        @content;
+      }
+    } @else if $class == scrollmobile {
+      @media (max-width: 991px), (max-height: 849px) {
+        @content;
+      }
+    } @else if $class == scrolldesktop {
+      @media (min-width: 992px), (min-height: 850px) {
+        @content;
+      }
+    } @else {
+      @warn "Breakpoint mixin supports: xs, sm, md, lg, xl";
+    }
+  }
+}
+
+// @mixin truncateLines($line-height: 1.25, $lines: 2, $font-size: 1rem) {
+//   display: block; /* Fallback for non-webkit */
+//   font-size: $font-size;
+//   line-height: $line-height;
+
+//   @if type-of($font-size) == 'list' {
+//     height: list.nth($font-size, 1) * $lines * $line-height;  /* Fallback for non-webkit */
+//   } @else if type-of($font-size) == 'number' {
+//     height: $font-size * $lines * $line-height;  /* Fallback for non-webkit */
+//   }
+
+//   overflow: hidden;
+
+//   @supports (-webkit-line-clamp: $lines) {
+//     display: -webkit-box;
+//     -webkit-line-clamp: $lines;
+//     -webkit-box-orient: vertical;
+//     text-overflow: ellipsis;
+//     // height: auto
+//   }
+// }
+
+@mixin generate-responsive {
+  $breakpoints: na, xxs, xs, sm, md, lg, xl, mobile, desktop;
+  @content;
+  @each $pt in $breakpoints {
+    @include breakpoint($pt) {
+      &-#{$pt} { @content; }
+    }
+  }
+}

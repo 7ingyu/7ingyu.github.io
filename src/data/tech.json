@@ -1,0 +1,12 @@
+{
+  "laravel": "https://laravel.com/",
+  "react": "https://react.dev/",
+  "mysql": "https://www.mysql.com/",
+  "bootstrap": "https://getbootstrap.com/",
+  "aws": "https://aws.amazon.com/",
+  "gsap": "https://greensock.com/",
+  "scrollmagic": "https://scrollmagic.io/",
+  "sass": "https://sass-lang.com/",
+  "nextjs": "https://nextjs.org/",
+  "jquery": "https://jquery.com/"
+}

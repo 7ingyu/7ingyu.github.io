@@ -6,10 +6,6 @@ const linkKeys = () => {
     },
     {
       height: `3rem`,
-      fontSize: '5rem',
-    },
-    {
-      height: `3rem`,
       fontSize: '1.25rem',
     }
   ]

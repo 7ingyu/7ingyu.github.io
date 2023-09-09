@@ -25,14 +25,13 @@ header {
     display: flex;
     // align-items: center;
 
-    > a {
+    > * {
       width: 100%;
       height: 2rem;
       display: flex;
       align-items: center;
-      text-decoration: none;
 
-      > span {
+      > a {
         @extend .container;
         color: white;
       }
@@ -65,7 +64,11 @@ header {
     // top: 0;
     // width: 100%;
     // overflow: hidden;
-    min-height: 200px;
+    min-height: 100px;
+
+    @include breakpoint(xs) {
+      max-height: 20vh;
+    }
     // padding-bottom: 1rem;
 
     & img {
@@ -81,9 +84,18 @@ header {
     @extend .card;
     background-color: white;
     // width: clamp(100%);
+    font-size: clamp(6px, 2vh, 1rem);
+    max-height: 35vh;
+    overflow-y: scroll;
   }
 }
 
 .pin-spacer {
   top: 0;
+}
+
+.badge-image {
+  object-fit: contain;
+  object-position: center center;
+  height: 100%;
 }

@@ -1,10 +1,11 @@
 import { MouseEvent, RefObject, forwardRef, useImperativeHandle, useRef, useState, useEffect } from 'react';
 import { ProjectProps } from './Project';
+import techLinks from '@/data/tech.json';
 
 interface References {
-  bg: RefObject<HTMLDivElement>;
+  badges: RefObject<HTMLDivElement>;
   header: RefObject<HTMLHeadingElement>;
-  link: RefObject<HTMLAnchorElement>;
+  link: RefObject<HTMLDivElement>;
   // content: RefObject<HTMLDivElement>;
 }
 
@@ -16,30 +17,24 @@ type ProjectTimelineProps = ProjectProps & {
 };
 
 const ProjectCollapse = forwardRef((
-  { handleClick, toAnimate, open, idx, name, color }: ProjectTimelineProps,
+  { handleClick, toAnimate, open, idx, name, color, tech }: ProjectTimelineProps,
   ref
 ) => {
   const [ zIndex, setZIndex ] = useState<number>(0);
+  const links: { [key:string]: string } = techLinks;
 
   const references: References = {
     header: useRef(null),
     link: useRef(null),
-    bg: useRef(null)
+    badges: useRef(null),
   };
 
   useImperativeHandle(ref, () => (references));
 
-  const handleHeaderClick = (event: MouseEvent<HTMLAnchorElement>) => {
+  const handleHeaderClick = (event: MouseEvent<HTMLDivElement>) => {
     event.preventDefault();
     handleClick(idx);
   }
-
-  // useEffect(() => {
-  //   const container = document.querySelector(`project-container-${idx}-${name.toLowerCase()}`) as HTMLElement;
-  //   if (collapsed) {
-  //     container?.style.setProperty('position', 'fixed');
-  //   }
-  // }, [collapsed])
 
   useEffect(() => {
     let z = 0
@@ -71,9 +66,9 @@ const ProjectCollapse = forwardRef((
         }}
         id={`toggle-${idx}-${name.toLowerCase()}`}
       >
-        <a
+        <div
+          className=""
           ref={references.link}
-          href={`#${name.toLowerCase()}`}
           onClick={handleHeaderClick}
           aria-controls={`collapse-${idx}-${name.toLowerCase()}`}
           aria-expanded={open[idx]}
@@ -81,8 +76,32 @@ const ProjectCollapse = forwardRef((
             backgroundColor: `var(--bs-${color})`,
           }}
         >
-          <span >{name}</span>
-        </a>
+          <div className='container h-100'>
+            <div className="position-relative d-flex align-items-center justify-content-between h-100">
+              <div className='d-flex align-items-center justify-content-center h-100 py-1'>
+                <a
+                  href={`#${name.toLowerCase()}`}
+                  className="badge bg-white text-black"
+                >
+                  {name}
+                </a>
+              </div>
+              <div ref={references.badges} className="d-flex align-items-center h-100">
+                {tech.map((item, i) =>
+                  <a
+                    key={`project-${idx}-tech-${i}-${item}`}
+                    href={links?.[item.toLowerCase()] || '#'}
+                    className="badge bg-white m-1 h-100"
+                    style={{color: `var(--bs-${color})`}}
+                    // ref={el => references.badges.current?.push(el)}
+                  >
+                    <img className="badge-image" src={`${item.toLowerCase()}.png`} alt={item} title={item} />
+                  </a>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
       </h2>
     </>
   );
