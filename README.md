@@ -1,21 +1,30 @@
-# Tea 'n You
+# React + TypeScript + Vite
 
-What amazingness can Tea and you come up with together?
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-[https://7ingyu.github.io](https://7ingyu.github.io)
+Currently, two official plugins are available:
 
-## Description
-Welcome Tea 'n You, the repository for portfolio website of one Ting-Yu Chen, aka Tea. _(Get it? "Tea 'n You" == "Ting-Yu"? Hehe.)_ It's a static site that explores various animation techniques while simultaneously showing off my past projects. If you like what you see, hit me up for employment!
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-## Tech
-- React
-- Vite
-- GSAP
-- TypeScript
+## Expanding the ESLint configuration
 
-## Setup
-- `yarn dev`
-- Go to [http://127.0.0.1:5173/](http://127.0.0.1:5173/)
+If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
 
-## Contact Info
-[7ingyu@gmail.com](mailto:7ingyu@gmail.com)
+- Configure the top-level `parserOptions` property like this:
+
+```js
+export default {
+  // other rules...
+  parserOptions: {
+    ecmaVersion: 'latest',
+    sourceType: 'module',
+    project: ['./tsconfig.json', './tsconfig.node.json'],
+    tsconfigRootDir: __dirname,
+  },
+}
+```
+
+- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
+- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
+- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
