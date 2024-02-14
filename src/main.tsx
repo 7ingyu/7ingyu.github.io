@@ -9,7 +9,7 @@ import App from './App'
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />,
+    element: <App section="header" />,
     // loader: async ({ params }) => {
     //   return fakeDb.from("teams").select("*");
     // },
@@ -37,6 +37,7 @@ const router = createBrowserRouter([
     ],
   },
 ]);
+
 
 ReactDOM.createRoot(document.getElementById("root") || document.body).render(
   <React.StrictMode>

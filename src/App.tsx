@@ -1,14 +1,15 @@
 import { useEffect, useRef, useState } from 'react'
 import { Nav, Header, PersonalWork, ProfessionalWork } from '@/components'
 import '@/styles/index.scss'
+import { ThemeContext } from '@/context'
 
 const App = ({ section } : { section?: string }) => {
   const body = useRef<HTMLElement>(document.body)
-  const [ mode, setMode ] = useState('dark');
+  const [ theme, setTheme ] = useState('dark')
 
   useEffect(() => {
-    body.current.setAttribute('data-bs-theme', mode);
-  }, [body, mode])
+    body.current.setAttribute('data-bs-theme', theme);
+  }, [body, theme])
 
   useEffect(() => {
     if (!section) return
@@ -20,9 +21,10 @@ const App = ({ section } : { section?: string }) => {
   }, [section])
 
   return (
-    <>
+    <ThemeContext.Provider value={[ theme, setTheme ]}>
       <Nav />
-    </>
+      <Header />
+    </ThemeContext.Provider>
   )
 }
 

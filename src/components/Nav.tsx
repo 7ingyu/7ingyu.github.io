@@ -1,11 +1,13 @@
-import { useRef, useState, useEffect } from 'react'
+import { useRef, useState, useEffect, useContext } from 'react'
 import { Link, createRoutesFromElements } from 'react-router-dom'
 import { Collapse } from 'bootstrap'
+import { ThemeContext } from '@/context'
 
 const Nav = () => {
 
   const collapses = useRef<{[key:string]: Collapse}>({})
   const [ open, setOpen ] = useState<{[key:string]: boolean}>({})
+  const [ theme, setTheme ] = useContext(ThemeContext)
 
   useEffect(() => {
     const openStates: {[key:string]: boolean} = {}
@@ -78,6 +80,13 @@ const Nav = () => {
               </ul>
             </li>
           </ul>
+          <div>
+            <button
+              onClick={() => setTheme(theme == 'dark' ? 'light' : 'dark')}
+            >
+              {theme}
+            </button>
+          </div>
         </div>
       </div>
     </nav>
