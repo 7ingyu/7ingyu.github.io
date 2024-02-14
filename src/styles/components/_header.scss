@@ -11,7 +11,7 @@
   width: 100%;
   display: flex;
   // justify-content: center;
-  align-items: center;
+  align-items: end;
 
   .header-bg {
     position: absolute;
@@ -28,8 +28,11 @@
     // background-blend-mode: lighten;
   }
 
-  h1 {
-    mix-blend-mode: difference;
-    filter: invert(var(--bg-invert));
+  .header-content {
+    padding: 2rem 0;
+    background-color: var(--bs-body-bg);
+    width: 100%;
+    // mix-blend-mode: difference;
+    // filter: invert(var(--bg-invert)) drop-shadow($body-color 0 0 0.5rem);
   }
 }
