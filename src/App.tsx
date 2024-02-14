@@ -1,5 +1,10 @@
 import { useEffect, useRef, useState } from 'react'
-import { Nav, Header, PersonalWork, ProfessionalWork } from '@/components'
+import {
+  Nav,
+  Header,
+  // PersonalWork,
+  // ProfessionalWork
+} from '@/components'
 import '@/styles/index.scss'
 import { ThemeContext } from '@/context'
 
