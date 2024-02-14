@@ -1,7 +1,7 @@
 {
-  "name": "my-vue-app",
-  "private": true,
-  "version": "0.0.0",
+  "name": "7ingyu.github.io",
+  "private": false,
+  "version": "2024.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
