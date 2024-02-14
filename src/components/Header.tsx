@@ -1,6 +1,8 @@
 const Header = () => {
   return (
-    null
+    <div id="header">
+      <h1>Ting-Yu Chen</h1>
+    </div>
   )
 }
 

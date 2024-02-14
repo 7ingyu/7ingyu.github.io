@@ -1,0 +1,22 @@
+[data-bs-theme="dark"] {
+  --bg-invert: 0;
+}
+
+[data-bs-theme="light"] {
+  --bg-invert: 1;
+}
+
+#header {
+  background-image: url('/assets/portrait.jpg');
+  height: 100vh;
+  width: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  filter: contrast(115%) invert(var(--bg-invert));
+  z-index: 0;
+  background-blend-mode: lighten;
+}
