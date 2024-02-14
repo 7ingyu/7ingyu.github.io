@@ -34,11 +34,12 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 18
-          cache: 'yarn'
+      - name: Setup bun
+        uses: oven-sh/setup-bun@v1
       - name: Install dependencies
-        run: yarn install
+        run: bun install
       - name: Build
-        run: yarn build
+        run: bun build
       - name: Setup Pages
         uses: actions/configure-pages@v3
       - name: Upload artifact
