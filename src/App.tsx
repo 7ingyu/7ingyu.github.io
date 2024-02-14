@@ -13,7 +13,9 @@ const App = ({ section } : { section?: string }) => {
   }, [section])
 
   return (
-    <Nav />
+    <div data-bs-theme="dark">
+      <Nav />
+    </div>
   )
 }
 
