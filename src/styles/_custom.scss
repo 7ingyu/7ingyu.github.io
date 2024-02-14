@@ -1,0 +1,28 @@
+::-webkit-scrollbar {
+  display: none;
+}
+
+* {
+  scrollbar-width: none;
+  transition: all 1s;
+}
+
+body {
+  min-height: 100vh;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+a, .btn-link {
+  color: $body-color;
+}
+
+@each $breakpoint in map-keys($grid-breakpoints) {
+  $next: breakpoint-next($breakpoint, $grid-breakpoints);
+  $infix: breakpoint-infix($next, $grid-breakpoints);
+  .position#{$infix}-absolute {
+    @include media-breakpoint-up($breakpoint) {
+      position: absolute;
+    }
+  }
+}

@@ -1,34 +1,31 @@
-// import React, { useEffect, useState, MouseEvent, ComponentType } from 'react';
-// import { Collapse } from 'bootstrap';
-import { Project } from './components';
+import { useEffect, useRef, useState } from 'react'
+import { Nav, Header, PersonalWork, ProfessionalWork } from '@/components'
+import '@/styles/index.scss'
+import { ThemeContext } from '@/context'
 
-// const components: { [key: string]: React.ComponentType } = {
-//   Landing, About
-// };
+const App = ({ section } : { section?: string }) => {
+  const body = useRef<HTMLElement>(document.body)
+  const [ theme, setTheme ] = useState('dark')
 
-const App = () => {
+  useEffect(() => {
+    body.current.setAttribute('data-bs-theme', theme);
+  }, [body, theme])
+
+  useEffect(() => {
+    if (!section) return
+    document.getElementById(section)?.scrollIntoView({
+      behavior: 'instant',
+      block: 'start',
+      inline: 'start'
+    })
+  }, [section])
+
   return (
-    <div>
-      <header className='container'>
-        <h1 className="m-0 p-0">
-          <a
-            href={`#landing`}
-          >
-            Tea Portfolio
-          </a>
-        </h1>
-      </header>
-      {/* <main>
-        {projects.map((proj, idx) => (
-          idx && <Project {...{idx, ...proj}} key={`project-${idx}`}/>
-        ))}
-      </main> */}
-      <Project />
-      <footer>
-        {/* Contact Info Here*/}
-      </footer>
-    </div>
-  );
-};
+    <ThemeContext.Provider value={[ theme, setTheme ]}>
+      <Nav />
+      <Header />
+    </ThemeContext.Provider>
+  )
+}
 
-export default App;
+export default App
