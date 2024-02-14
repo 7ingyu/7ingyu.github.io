@@ -28,9 +28,9 @@ const Nav = () => {
   }, [open])
 
   return (
-    <nav className="navbar navbar-expand-lg bg-transparent">
+    <nav className="navbar navbar-expand-lg bg-body">
       <div className="container-fluid">
-        <Link className="navbar-brand" to="#">Navbar</Link>
+        <Link className="navbar-brand" to="#"></Link>
         <button
           className="navbar-toggler"
           type="button"
@@ -46,25 +46,24 @@ const Nav = () => {
             <li className="nav-item">
               <Link className="nav-link active" aria-current="page" to="#">Home</Link>
             </li>
-            <li className="nav-item dropdown" data-bs-target="worklinks">
-              <Link
-                className="nav-link dropdown-toggle"
-                to="#"
-                role="button"
-                aria-expanded="false"
-              >
-                Work
-              </Link>
-              <ul className="dropdown-menu" id="worklinks">
-                <li><Link className="dropdown-item" to="#">Professional</Link></li>
-                <li><Link className="dropdown-item" to="#">Personal</Link></li>
+            <li
+              className="nav-item dropdown"
+              data-bs-target="worklinks"
+              aria-expanded={open.worklinks}
+              onMouseEnter={() => setOpen({...open, worklinks: true, contactlinks: false})}
+              onMouseLeave={() => setOpen({...open, worklinks: false})}
+            >
+              <Link className="nav-link dropdown-toggle" to="#">Work</Link>
+              <ul className="collapse list-unstyled position-xl-absolute" id="worklinks">
+                <li className="nav-item"><Link className="nav-link" to="#">Professional</Link></li>
+                <li className="nav-item"><Link className="nav-link" to="#">Personal</Link></li>
               </ul>
             </li>
             <li
               className="nav-item dropdown"
               data-bs-target="contactlinks"
               aria-expanded={open.contactlinks}
-              onMouseEnter={() => setOpen({...open, contactlinks: true})}
+              onMouseEnter={() => setOpen({...open, contactlinks: true, worklinks: false})}
               onMouseLeave={() => setOpen({...open, contactlinks: false})}
             >
               <Link
@@ -73,9 +72,9 @@ const Nav = () => {
               >
                 Contact
               </Link>
-              <ul className="dropdown-menu" id="contactlinks">
-                <li><Link className="dropdown-item" to="#">LinkedIn</Link></li>
-                <li><Link className="dropdown-item" to="#">Github</Link></li>
+              <ul className="collapse list-unstyled position-xl-absolute" id="contactlinks">
+                <li className="nav-item"><Link className="nav-link" to="#">LinkedIn</Link></li>
+                <li className="nav-item"><Link className="nav-link" to="#">Github</Link></li>
               </ul>
             </li>
           </ul>
