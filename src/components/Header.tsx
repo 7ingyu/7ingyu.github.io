@@ -1,6 +1,7 @@
 const Header = () => {
   return (
-    <div id="header">
+    <div id="header" className="container">
+      <div className="header-bg" />
       <h1>Ting-Yu Chen</h1>
     </div>
   )
