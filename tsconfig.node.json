@@ -5,9 +5,9 @@
     "module": "ESNext",
     "moduleResolution": "bundler",
     "allowSyntheticDefaultImports": true,
-    "lib": [
-      "es5", "es6", "dom", "dom.iterable"
-    ]
+    // "lib": [
+    //   "es5", "es6", "dom", "dom.iterable"
+    // ]
   },
   "include": ["vite.config.ts"]
 }

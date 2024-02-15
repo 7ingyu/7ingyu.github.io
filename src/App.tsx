@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import {
   Nav,
   Header,
+  Work,
   // PersonalWork,
   // ProfessionalWork
 } from '@/components'
@@ -29,6 +30,7 @@ const App = ({ section } : { section?: string }) => {
     <ThemeContext.Provider value={[ theme, setTheme ]}>
       <Nav />
       <Header />
+      <Work />
     </ThemeContext.Provider>
   )
 }
