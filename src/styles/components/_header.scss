@@ -34,5 +34,26 @@
     width: 100%;
     // mix-blend-mode: difference;
     // filter: invert(var(--bg-invert)) drop-shadow($body-color 0 0 0.5rem);
+
+    .container {
+      display: flex;
+      column-gap: 1.5rem;
+      align-items: baseline;
+      justify-content: flex-start;
+      flex-wrap: wrap;
+
+      h1, h2 {
+        margin-bottom: 0;
+        padding-bottom: 0;
+        width: max-content;
+      }
+      h1 {
+        font-family: "Protest Revolution", sans-serif;
+      }
+      h2 {
+        letter-spacing: -0.125rem;
+        font-weight: 300;
+      }
+    }
   }
 }

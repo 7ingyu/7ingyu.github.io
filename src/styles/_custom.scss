@@ -11,6 +11,8 @@ body {
   min-height: 100vh;
   overflow-y: scroll;
   overflow-x: hidden;
+  font-family: $default-font;
+  font-weight: 400;
 }
 
 a, .btn-link {

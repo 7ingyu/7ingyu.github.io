@@ -1,1 +1,11 @@
+// Custom
+$default-font: "Noto Sans", sans-serif;
+
+// Bootstrap Overrides
 $body-bg-dark: black;
+
+// $headings-font-family: "Protest Revolution", sans-serif;
+// $display-font-family: "Protest Revolution", sans-serif;
+// $headings-font-weight: 300;
+$nav-link-font-family: $default-font;
+$nav-link-font-weight: 600;
