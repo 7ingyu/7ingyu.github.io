@@ -2,11 +2,20 @@ import { useRef, useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { Collapse } from 'bootstrap'
 import { ThemeToggle } from '@/components'
+import { personalProjects, professionalProjects } from '@/data'
+
+interface Project {
+  title: string
+  link: string
+}
 
 const Nav = () => {
-
   const collapses = useRef<{[key:string]: Collapse}>({})
   const [ open, setOpen ] = useState<{[key:string]: boolean}>({})
+  const [ projects ] = useState<{personal: Project[], professional: Project[]}>({
+    personal: personalProjects,
+    professional: professionalProjects,
+  })
 
   useEffect(() => {
     const openStates: {[key:string]: boolean} = {}
@@ -49,23 +58,52 @@ const Nav = () => {
             </li>
             <li
               className="nav-item dropdown"
-              data-bs-target="worklinks"
-              aria-expanded={open.worklinks}
-              onMouseEnter={() => setOpen({...open, worklinks: true, contactlinks: false})}
-              onMouseLeave={() => setOpen({...open, worklinks: false})}
+              data-bs-target="professionalwork"
+              aria-expanded={open.professionalwork}
+              onMouseEnter={() => setOpen((open) => ({...open, professionalwork: true}))}
+              onMouseLeave={() => setOpen((open) => ({...open, professionalwork: false}))}
             >
-              <Link className="nav-link dropdown-toggle" to="#">Work</Link>
-              <ul className="collapse list-unstyled position-xl-absolute" id="worklinks">
-                <li className="nav-item"><Link className="nav-link" to="#">Professional</Link></li>
-                <li className="nav-item"><Link className="nav-link" to="#">Personal</Link></li>
+              <Link className="nav-link dropdown-toggle" to="#">Professional Work</Link>
+              <ul className="collapse list-unstyled position-xl-absolute" id="professionalwork">
+                {projects.professional.map(({title, link}, i) => (
+                  <li className="nav-item" key={i}>
+                    <Link
+                      className="nav-link"
+                      to={link}
+                    >
+                        {title}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </li>
+            <li
+              className="nav-item dropdown"
+              data-bs-target="personalwork"
+              aria-expanded={open.personalwork}
+              onMouseEnter={() => setOpen((open) => ({...open, personalwork: true}))}
+              onMouseLeave={() => setOpen((open) => ({...open, personalwork: false}))}
+            >
+              <Link className="nav-link dropdown-toggle" to="#">Personal Work</Link>
+              <ul className="collapse list-unstyled position-xl-absolute" id="personalwork">
+                {projects.personal.map(({title, link}, i) => (
+                  <li className="nav-item" key={i}>
+                    <Link
+                      className="nav-link"
+                      to={link}
+                    >
+                        {title}
+                    </Link>
+                  </li>
+                ))}
               </ul>
             </li>
             <li
               className="nav-item dropdown"
               data-bs-target="contactlinks"
               aria-expanded={open.contactlinks}
-              onMouseEnter={() => setOpen({...open, contactlinks: true, worklinks: false})}
-              onMouseLeave={() => setOpen({...open, contactlinks: false})}
+              onMouseEnter={() => setOpen((open) => ({...open, contactlinks: true}))}
+              onMouseLeave={() => setOpen((open) => ({...open, contactlinks: false}))}
             >
               <Link
                 className="nav-link dropdown-toggle"
@@ -74,8 +112,8 @@ const Nav = () => {
                 Contact
               </Link>
               <ul className="collapse list-unstyled position-xl-absolute" id="contactlinks">
-                <li className="nav-item"><Link className="nav-link" to="#">LinkedIn</Link></li>
-                <li className="nav-item"><Link className="nav-link" to="#">Github</Link></li>
+                <li className="nav-item"><Link className="nav-link" to="https://linkedin.com/in/7ingyu">LinkedIn</Link></li>
+                <li className="nav-item"><Link className="nav-link" to="https://github.com/7ingyu">Github</Link></li>
               </ul>
             </li>
           </ul>

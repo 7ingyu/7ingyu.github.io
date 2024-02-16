@@ -11,4 +11,9 @@ export default defineConfig({
       { find: '~', replacement: path.resolve(__dirname, 'node_modules') },
     ],
   },
+  server: {
+    watch: {
+      usePolling: true
+    }
+  }
 })
