@@ -11,5 +11,17 @@
   ul {
     @extend .bg-body;
     border-radius: 0.25rem;
+
+    li {
+      width: max-content;
+    }
+
+    @include media-breakpoint-down(lg) {
+      li {
+        li {
+          padding-left: 2rem;
+        }
+      }
+    }
   }
 }

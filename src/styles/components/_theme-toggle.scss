@@ -3,8 +3,8 @@
   --toggle-bg-night-opacity: 1;
   --toggle-position: 100%;
   --toggle-translate: -100%;
-  --toggle-btn-color: #555555;
-  --toggle-drop-color: black;
+  --toggle-btn-color: #AAAAAA;
+  --toggle-drop-color: #555555;
 }
 
 [data-bs-theme="light"] {
@@ -21,8 +21,9 @@
   border-radius: 1.5rem;
   border-style: inset;
   border-width: 2px;
+  border-color: var(--bs-body-color);
   height: 3rem;
-  width: 5.5rem;
+  width: 6rem;
   padding: 0.5rem;
   display: flex;
   align-items: center;
